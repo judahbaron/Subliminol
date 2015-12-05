@@ -1,0 +1,44 @@
+{
+    "folders":
+    [
+        {
+            "path": "src",
+            "folder_exclude_patterns": ["backup"],
+            "folder_include_patterns": ["py", ".sublime*"],
+            "follow_symlinks": true
+        },
+        {
+            "path": "docs",
+            "name": "Documentation",
+            "file_exclude_patterns": ["*.css"]
+        },
+        {
+            "path": "build"
+        },
+        {
+            "path": "."
+        }
+    ],
+    "settings":
+    {
+        "tab_size": 4
+    },
+    "build_systems":
+    [
+        {
+            "name": "Subliminol",
+            "env": {"SUBLIME_PLUGIN_DIR": "C:\\Users\\judah\\AppData\\Roaming\\Sublime Text 3\\Packages\\User"},
+            
+            "cmd": "\"$project_path\\build\\copy_to_sublime_exe_dir.bat\" \"$file\" \"%SUBLIME_PLUGIN_DIR%\"",
+            "shell": true,
+            
+            "variants":[
+                {
+                    "name": "Deploy",
+                    "cmd": "\"$project_path\\build\\copy_to_sublime_exe_dir.bat\" \"$file\" \"%SUBLIME_PLUGIN_DIR%\"",
+                    "shell": true,
+                }
+            ]
+        }
+    ]
+}

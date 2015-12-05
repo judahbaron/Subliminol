@@ -1,0 +1,4 @@
+echo ARCHIEs
+echo SUBLIME_PLUGIN_DIR=%SUBLIME_PLUGIN_DIR%
+
+copy %1 %2
