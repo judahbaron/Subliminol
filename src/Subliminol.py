@@ -13,6 +13,7 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		self.edit = None
 		self.running = False
 		self.settings = None
+		self.history = None
 		self.command_string_data = None
 		# A string indicating either "system" or "python"
 		self.command_mode = None
@@ -43,7 +44,7 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		if history_key is None:
 			print("No history_key!")
 			return
-		command_history = self.settings.get(history_key, None)
+		command_history = self.history.get(history_key, None)
 		# This may be the first time through, in which case the history array
 		# will be None. Set it to [] instead, so we can add to it and 
 		if command_history is None:
@@ -61,15 +62,15 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		if len(command_history) > self.history_length_setting:
 			command_history = command_history[0:(self.history_length_setting-1)]
 		
-		self.settings.set(history_key, command_history)
-		sublime.save_settings('Subliminol.sublime-settings')
+		self.history.set(history_key, command_history)
+		sublime.save_settings('Subliminol-history.sublime-settings')
 
 	def run_history_panel(self):
 		'''
 		Open a panel displaying the history array, and allowing the user to make
 		a selection. 
 		'''
-		history_data = self.settings.get(self.history_key, None)
+		history_data = self.history.get(self.history_key, None)
 		if history_data is None:
 			print("NO HISTORY")
 			return
@@ -100,6 +101,7 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		self.edit = edit
 		self.command_mode = command_mode
 		self.settings = sublime.load_settings('Subliminol.sublime-settings')
+		self.history = sublime.load_settings('Subliminol-history.sublime-settings')
 		
 		if history_panel_mode:
 			self.run_history_panel()

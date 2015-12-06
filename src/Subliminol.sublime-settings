@@ -1,0 +1,6 @@
+{
+	"python_history_length": 20,
+	"select_output_on_complete": true,
+	"system_blocking_mode": true,
+	"write_history_on_success_only": false
+}
