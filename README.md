@@ -1,2 +1,7 @@
 # Subliminol
-A Sublime Text plugin that allows you to use Sublime like a system console and a python interpreter.
+A Sublime Text plugin that provides system and python execution capabilities.
+-Run system commands
+-Run python commands
+-Capture output from all executions in a text buffer.
+-Retain independent command history for system and python commands
+-Supports multiple selections

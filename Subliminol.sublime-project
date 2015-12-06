@@ -16,7 +16,8 @@
             "path": "build"
         },
         {
-            "path": "."
+            "path": ".",
+            "folder_include_patterns": ["README*"]
         }
     ],
     "settings":
