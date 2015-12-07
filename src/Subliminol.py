@@ -110,7 +110,6 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		self.get_console(console_name=CONSOLE_NAME)
 		# print("CONSOLE_NAME {0} call".format(command_mode))
 		
-		
 		# print(self.settings.get("test_setting"))
 		# print(self.settings.get("test_array_setting"))
 
@@ -123,7 +122,11 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 			self.command_mode = None
 			return
 
+		# This is reset with each execution.
 		self.command_string_data = []
+
+		# When nothing is provided on the call to run(), command_string_data
+		# is populated from the current selection.
 		if command_string_data is None:
 			# Gather command string data from the selections in the view	
 			for region in self.view.sel():
@@ -131,7 +134,7 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 					self.command_string_data.append(self.view.substr(region))
 		else:
 			self.command_string_data.extend(command_string_data)
-
+		
 		if len(self.command_string_data):
 			the_call = None
 			if self.command_mode == "system":

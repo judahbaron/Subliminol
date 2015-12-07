@@ -47,7 +47,15 @@
 			"file": "Subliminol.sublime-project",
 			"settings":
 			{
-				"buffer_size": 867,
+				"buffer_size": 1182,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 466,
 				"line_ending": "Windows"
 			}
 		},
@@ -55,7 +63,31 @@
 			"file": "src/Subliminol.py",
 			"settings":
 			{
-				"buffer_size": 7550,
+				"buffer_size": 8015,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/Subliminol.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 141,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": ".hgignore",
+			"settings":
+			{
+				"buffer_size": 7,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Subliminol-history.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 115,
 				"line_ending": "Unix"
 			}
 		},
@@ -63,7 +95,25 @@
 			"file": "build/copy_to_sublime_exe_dir.bat",
 			"settings":
 			{
-				"buffer_size": 69,
+				"buffer_size": 73,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "--------------------------------------------------------------------------------\nSUBLIME_PLUGIN_DIR=%SUBLIME_PLUGIN_DIR%\ndir /w\n--------------------------------------------------------------------------------\n Volume in drive D is Daenerys\n Volume Serial Number is F6E6-9EB6\n\n Directory of D:\\hgRepos\\Subliminol\\src\n\n12/05/2015  07:31 PM    <DIR>          .\n12/05/2015  07:31 PM    <DIR>          ..\n12/05/2015  07:31 PM             8,027 Subliminol.py\n12/05/2015  12:29 PM               632 Subliminol.sublime-settings\n12/05/2015  07:31 PM            11,248 Subliminol.sublime-workspace\n               3 File(s)         19,907 bytes\n               2 Dir(s)  1,829,456,211,968 bytes free\ndir\n--------------------------------------------------------------------------------\n Volume in drive D is Daenerys\n Volume Serial Number is F6E6-9EB6\n\n Directory of D:\\hgRepos\\Subliminol\\src\n\n12/05/2015  07:31 PM    <DIR>          .\n12/05/2015  07:31 PM    <DIR>          ..\n12/05/2015  09:04 PM             8,133 Subliminol.py\n12/05/2015  12:29 PM               632 Subliminol.sublime-settings\n12/05/2015  07:31 PM            11,248 Subliminol.sublime-workspace\n               3 File(s)         20,013 bytes\n               2 Dir(s)  1,829,456,211,968 bytes free\n--------------------------------------------------------------------------------\n",
+			"settings":
+			{
+				"buffer_size": 1333,
+				"line_ending": "Windows",
+				"name": "Subliminol: Console",
+				"scratch": true
+			}
+		},
+		{
+			"file": "/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+			"settings":
+			{
+				"buffer_size": 16856,
 				"line_ending": "Windows"
 			}
 		},
@@ -71,8 +121,8 @@
 			"file": "Subliminol.sublime-workspace",
 			"settings":
 			{
-				"buffer_size": 15256,
-				"line_ending": "Unix"
+				"buffer_size": 15445,
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -80,7 +130,7 @@
 			"settings":
 			{
 				"buffer_size": 10904,
-				"line_ending": "Unix"
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -93,13 +143,38 @@
 				"buffer_size": 95,
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"contents": "Hi Dad!\n\nFive years ago in Allentown you, when you shouted \"Angus, why don't you shut the fuck up?!\", I realized I couldn't feel safe in your company. I also realized that my family doesn't deserve your profane hostility. I left Allentown for my family's safety, not to hurt you.\n\nThe letter you sent is filled with rage and accusation, but no apology or acknowledgement of your behavior in Allentown.\n\nI haven't taken my children from you. I haven't prevented you from communicating with me. I haven't changed my phone number or prevented you from contacting me. In fact, I called in 2013 to let you know we were moving to Baltimore.\n\nWhen you accept responsibility for your actions and undersand you aren't a victim, I'll take your communications more seriously. \n\nSharon",
+			"settings":
+			{
+				"buffer_size": 773,
+				"line_ending": "Windows",
+				"name": "Hi Dad!"
+			}
 		}
 	],
-	"build_system": "Packages/Python/Python.sublime-build",
+	"build_system": "Subliminol",
 	"build_system_choices":
 	[
+		[
+			[
+				[
+					"Subliminol",
+					""
+				],
+				[
+					"Subliminol",
+					"Deploy"
+				]
+			],
+			[
+				"Subliminol",
+				"Deploy"
+			]
+		]
 	],
-	"build_varint": "",
+	"build_varint": "Deploy",
 	"command_palette":
 	{
 		"height": 354.0,
@@ -127,7 +202,7 @@
 	},
 	"console":
 	{
-		"height": 282.0,
+		"height": 225.0,
 		"history":
 		[
 			"view.run_command(\"springboard\")",
@@ -162,9 +237,12 @@
 	},
 	"expanded_folders":
 	[
+		"/D/hgRepos/Subliminol"
 	],
 	"file_history":
 	[
+		"/D/hgRepos/Subliminol/.gitignore",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/C/Program Files/Sublime Text 3/Packages/Python.sublime-package",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Sublime-KL-1.1/.no-sublime-package",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Sublime-KL-1.1/.gitignore",
@@ -175,7 +253,6 @@
 		"/D/hgRepos/Subliminol/build/copy_to_sublime_exe_dir.bat",
 		"/D/hgRepos/Subliminol/src/Subliminol.sublime-project",
 		"/D/hgRepos/Subliminol/Subliminol.sublime-project",
-		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Subliminol.sublime-settings",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand/ShellCommand.py",
 		"/D/hgRepos/Subliminol/Subliminol.py",
@@ -263,6 +340,10 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"self.history",
+			"settings",
+			"sublime-settings",
+			"8",
 			"Subliminol:",
 			"Subliminol!",
 			"springboard",
@@ -310,7 +391,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -319,15 +400,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 867,
+						"buffer_size": 1182,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								399,
-								399
+								485,
+								485
 							]
 						],
 						"settings":
@@ -337,27 +418,55 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 7.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/Subliminol.py",
+					"file": "README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7550,
+						"buffer_size": 466,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1207,
-								1207
+								465,
+								429
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 17.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/Subliminol.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8015,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3558,
+								3558
 							]
 						],
 						"settings":
@@ -366,33 +475,118 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 408.0,
+						"translation.y": 1887.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 2,
-					"file": "build/copy_to_sublime_exe_dir.bat",
+					"buffer": 3,
+					"file": "src/Subliminol.sublime-settings",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 69,
+						"buffer_size": 141,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								69,
-								69
+								140,
+								140
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": ".hgignore",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7,
+								7
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Subliminol-history.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 115,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								75,
+								75
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 6,
+					"file": "build/copy_to_sublime_exe_dir.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 73,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13,
+								57
 							]
 						],
 						"settings":
@@ -403,16 +597,73 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1333,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1101,
+								1101
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 8,
+					"file": "/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16856,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16672,
+								16672
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 6227.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
 					"file": "Subliminol.sublime-workspace",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15256,
+						"buffer_size": 15445,
 						"regions":
 						{
 						},
@@ -431,11 +682,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 10,
 					"file": "src/Subliminol.sublime-workspace",
 					"semi_transient": false,
 					"settings":
@@ -447,8 +698,8 @@
 						"selection":
 						[
 							[
-								9163,
-								9163
+								726,
+								726
 							]
 						],
 						"settings":
@@ -457,14 +708,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5406.0,
+						"translation.y": 1691.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 11,
 					"file": "Subliminol.sublime-build",
 					"semi_transient": false,
 					"settings":
@@ -488,7 +739,35 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 773,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								773
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Hi Dad!",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
 					"type": "text"
 				}
 			]
@@ -522,7 +801,7 @@
 		"cols":
 		[
 			0.0,
-			0.518479605585,
+			0.552605138796,
 			1.0
 		],
 		"rows":
