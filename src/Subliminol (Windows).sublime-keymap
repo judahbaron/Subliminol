@@ -1,0 +1,32 @@
+[
+  {
+    "keys": ["ctrl+enter"],
+    "command": "subliminol",
+    "args": {
+      "command_mode": "system"
+    }
+  },
+  {
+    "keys": ["ctrl+shift+enter"],
+    "command": "subliminol",
+    "args": {
+      "command_mode": "python"
+    }
+  },
+  {
+    "keys": ["ctrl+alt+shift+space"],
+    "command": "subliminol",
+    "args": {
+      "command_mode": "system",
+      "history_panel_mode": true
+    }    
+  },
+  {
+    "keys": ["ctrl+alt+space"],
+    "command": "subliminol",
+    "args": {
+      "command_mode": "python",
+      "history_panel_mode": true
+    }    
+  }
+]

@@ -28,9 +28,9 @@
     [
         {
             "name": "Subliminol",
-            "env": {"SUBLIME_PLUGIN_DIR": "$USERPROFILE\\AppData\\Roaming\\Sublime Text 3\\Packages\\User"},
+            "env": {"SUBLIME_PLUGIN_DIR": "$USERPROFILE\\AppData\\Roaming\\Sublime Text 3\\Packages\\Subliminol"},
             
-            "cmd": "\"$project_path\\build\\copy_to_sublime_exe_dir.bat\" \"$file\" \"%SUBLIME_PLUGIN_DIR%\"",
+            "cmd": "\"$project_path\\build\\copy_to_sublime_exe_dir.bat\" \"$project_path\" \"%SUBLIME_PLUGIN_DIR%\"",
             "shell": true,
             
             "variants":[
