@@ -4,16 +4,112 @@
 		"selected_items":
 		[
 			[
-				"Sublim",
-				"Subliminol"
+				"R",
+				"READY"
 			],
 			[
-				"S",
-				"Subliminol"
+				"console",
+				"console_mode"
+			],
+			[
+				"get_target",
+				"get_target_region_id"
+			],
+			[
+				"upda",
+				"update_thread"
+			],
+			[
+				"Subliminol",
+				"SubliminolCallBase"
+			],
+			[
+				"class",
+				"classmethod"
+			],
+			[
+				"get",
+				"get_target_region"
+			],
+			[
+				"active",
+				"active_view"
+			],
+			[
+				"has",
+				"has_data"
+			],
+			[
+				"__",
+				"__active_threads"
+			],
+			[
+				"RU",
+				"RUNNING"
+			],
+			[
+				"COM",
+				"COMPLETE"
+			],
+			[
+				"ad",
+				"append_info"
+			],
+			[
+				"execution",
+				"execution_id"
+			],
+			[
+				"set",
+				"set_timeout"
+			],
+			[
+				"E",
+				"ERROR"
+			],
+			[
+				"do",
+				"do_write_history"
+			],
+			[
+				"_in",
+				"_insertion_point"
+			],
+			[
+				"inser",
+				"_insertion_point"
+			],
+			[
+				"selec",
+				"selected_region"
+			],
+			[
+				"insertion",
+				"insertion_point"
+			],
+			[
+				"command_string",
+				"command_string_data"
 			],
 			[
 				"command",
-				"command_mode"
+				"command_string_data"
+			],
+			[
+				"append",
+				"append_info"
+			],
+			[
+				"Su",
+				"SubliminolCallBase"
+			],
+			[
+				"S",
+				"SubliminolCallBase"
+			],
+			[
+				"Sublim",
+				"Subliminol"
 			],
 			[
 				"hi",
@@ -44,26 +140,10 @@
 	"buffers":
 	[
 		{
-			"file": "Subliminol.sublime-project",
-			"settings":
-			{
-				"buffer_size": 1182,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "README.md",
-			"settings":
-			{
-				"buffer_size": 466,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "src/Subliminol.py",
 			"settings":
 			{
-				"buffer_size": 8015,
+				"buffer_size": 18688,
 				"line_ending": "Windows"
 			}
 		},
@@ -71,86 +151,41 @@
 			"file": "src/Subliminol.sublime-settings",
 			"settings":
 			{
-				"buffer_size": 141,
+				"buffer_size": 246,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": ".hgignore",
+			"file": "data/Batch File.tmLanguage",
 			"settings":
 			{
-				"buffer_size": 7,
+				"buffer_size": 6881,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Subliminol-history.sublime-settings",
+			"file": "Subliminol.sublime-project",
 			"settings":
 			{
-				"buffer_size": 115,
-				"line_ending": "Unix"
+				"buffer_size": 1196,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "build/copy_to_sublime_exe_dir.bat",
 			"settings":
 			{
-				"buffer_size": 73,
+				"buffer_size": 122,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "--------------------------------------------------------------------------------\nSUBLIME_PLUGIN_DIR=%SUBLIME_PLUGIN_DIR%\ndir /w\n--------------------------------------------------------------------------------\n Volume in drive D is Daenerys\n Volume Serial Number is F6E6-9EB6\n\n Directory of D:\\hgRepos\\Subliminol\\src\n\n12/05/2015  07:31 PM    <DIR>          .\n12/05/2015  07:31 PM    <DIR>          ..\n12/05/2015  07:31 PM             8,027 Subliminol.py\n12/05/2015  12:29 PM               632 Subliminol.sublime-settings\n12/05/2015  07:31 PM            11,248 Subliminol.sublime-workspace\n               3 File(s)         19,907 bytes\n               2 Dir(s)  1,829,456,211,968 bytes free\ndir\n--------------------------------------------------------------------------------\n Volume in drive D is Daenerys\n Volume Serial Number is F6E6-9EB6\n\n Directory of D:\\hgRepos\\Subliminol\\src\n\n12/05/2015  07:31 PM    <DIR>          .\n12/05/2015  07:31 PM    <DIR>          ..\n12/05/2015  09:04 PM             8,133 Subliminol.py\n12/05/2015  12:29 PM               632 Subliminol.sublime-settings\n12/05/2015  07:31 PM            11,248 Subliminol.sublime-workspace\n               3 File(s)         20,013 bytes\n               2 Dir(s)  1,829,456,211,968 bytes free\n--------------------------------------------------------------------------------\n",
+			"contents": "dir\ndir c:\\windows\\\nset\nfind /N \"jpeg\" \"C:\\Users\\judah\\Downloads\\*.jpg\"\nfind /?\n\nkl2dfg %ZOS_BIN_TOOLS_DIR%\\Fabric\\ZOS\\Exts\\zoUtil\\zoUtil.fpm.json %ZOS_BIN_TOOLS_DIR%\\Fabric\\ZOS\\Exts\\zoUtil\\DFG\n\necho cd ..",
 			"settings":
 			{
-				"buffer_size": 1333,
+				"buffer_size": 205,
 				"line_ending": "Windows",
-				"name": "Subliminol: Console",
-				"scratch": true
-			}
-		},
-		{
-			"file": "/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
-			"settings":
-			{
-				"buffer_size": 16856,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Subliminol.sublime-workspace",
-			"settings":
-			{
-				"buffer_size": 15445,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/Subliminol.sublime-workspace",
-			"settings":
-			{
-				"buffer_size": 10904,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "{\n	\"cmd\": [\"dir\"],\n	\"shell_cmd\": \"\\\\build\\\\copy_to_sublime_exe_dir.bat\",\n	\"selector\": \"test\"\n}\n",
-			"file": "Subliminol.sublime-build",
-			"file_size": 100,
-			"file_write_time": 130938164518963504,
-			"settings":
-			{
-				"buffer_size": 95,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Hi Dad!\n\nFive years ago in Allentown you, when you shouted \"Angus, why don't you shut the fuck up?!\", I realized I couldn't feel safe in your company. I also realized that my family doesn't deserve your profane hostility. I left Allentown for my family's safety, not to hurt you.\n\nThe letter you sent is filled with rage and accusation, but no apology or acknowledgement of your behavior in Allentown.\n\nI haven't taken my children from you. I haven't prevented you from communicating with me. I haven't changed my phone number or prevented you from contacting me. In fact, I called in 2013 to let you know we were moving to Baltimore.\n\nWhen you accept responsibility for your actions and undersand you aren't a victim, I'll take your communications more seriously. \n\nSharon",
-			"settings":
-			{
-				"buffer_size": 773,
-				"line_ending": "Windows",
-				"name": "Hi Dad!"
+				"name": "Subliminol: Console"
 			}
 		}
 	],
@@ -170,11 +205,11 @@
 			],
 			[
 				"Subliminol",
-				"Deploy"
+				""
 			]
 		]
 	],
-	"build_varint": "Deploy",
+	"build_varint": "",
 	"command_palette":
 	{
 		"height": 354.0,
@@ -202,9 +237,16 @@
 	},
 	"console":
 	{
-		"height": 225.0,
+		"height": 288.0,
 		"history":
 		[
+			"sys.path.insert(0,r\"C:\\Users\\judah\\AppData\\Roaming\\Sublime Text 3\\Packages\\User\\Subliminol\")",
+			"sys.path.insert(0,r\"C:\\Users\\judah\\AppData\\Roaming\\Sublime Text 3\\Packages\\Subliminol\")",
+			"sys.path.insert(r\"C:\\Users\\judah\\AppData\\Roaming\\Sublime Text 3\\Packages\\Subliminol\")",
+			"print(\"\\n\".join(sys.path))",
+			"print \"\\n\".join(sys.path)",
+			"import sys",
+			"import os",
 			"view.run_command(\"springboard\")",
 			"cls",
 			"view.run_command(\"springboard\")",
@@ -237,12 +279,63 @@
 	},
 	"expanded_folders":
 	[
-		"/D/hgRepos/Subliminol"
+		"/D/hgRepos/Subliminol/src"
 	],
 	"file_history":
 	[
-		"/D/hgRepos/Subliminol/.gitignore",
+		"/D/hgRepos/Subliminol/.hg/store/data/_subliminol.py.i",
+		"/D/hgRepos/Subliminol/.hg/branch",
+		"/D/hgRepos/Subliminol/.hg/requires",
+		"/D/hgRepos/Subliminol/.hg/store/data/_subliminol.sublime-workspace.i",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/ShellCommand/Default.sublime-keymap",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/Glue/keymaps/Default (Windows).sublime-keymap",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Glue.sublime-settings",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/Glue/Glue.sublime-settings",
+		"/C/Users/judah/AppData/Local/Temp/7zO08D46571/Default (Windows).sublime-keymap",
+		"/D/hgRepos/Subliminol/src/Subliminol.sublime-workspace",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Installed Packages/Subliminol/Subliminol (Windows).sublime-keymap",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand/ShellCommand.py",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand/SublimeHelper.py",
+		"/D/hgRepos/Subliminol/Subliminol.sublime-build",
+		"/D/hgRepos/Subliminol/src/Subliminol.sublime-settings",
+		"/D/hgRepos/Subliminol/Batch File.tmLanguage.xml",
+		"/D/hgRepos/Subliminol/src/subliminol_core/subliminol_exc.py",
+		"/D/hgRepos/Subliminol/src/subliminol_core/subliminol_python_call.py",
+		"/D/hgRepos/Subliminol/src/subliminol_core/subliminol_call_base.py",
+		"/D/hgRepos/Subliminol/src/subliminol_core/subliminol_system_call.py",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/Subliminol/Subliminol.py",
+		"/D/hgRepos/Subliminol/src/subliminol_system_call.py",
+		"/D/hgRepos/Subliminol/src/subliminol_python_call.py",
+		"/D/hgRepos/Subliminol/src/subliminol_call_base.py",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/Subliminol/temp/test.py",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand/Default.sublime-keymap",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand/Default.sublime-commands",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand/message.json",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand/ShellCommand.sublime-settings",
+		"/D/hgRepos/Subliminol/src/Subliminol (Windows).sublime-keymap",
+		"/D/hgRepos/Subliminol/Subliminol.sublime-workspace",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Installed Packages/Subliminol/Subliminol.sublime-settings",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Subliminol",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand/Main.sublime-menu",
+		"/D/hgRepos/Subliminol/src/SubliminolPythonCall.py",
+		"/D/hgRepos/Subliminol/src/SubliminolSystemCall.py",
+		"/D/hgRepos/Subliminol/src/SubliminolCallBase.py",
+		"/D/hgRepos/Subliminol/src/SubliminolExc.py",
+		"/D/hgRepos/Subliminol/README.md",
+		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Subliminol-history.sublime-settings",
+		"/D/hgRepos/Subliminol/.hgignore",
+		"/D/Zenimax/jb-Tusc-StreamA/BinTools/Fabric/FabricEngine-2.0.0-Windows-x86_64/Exts/Builtin/FileIO/FilePath.kl",
+		"/D/Zenimax/jb-Tusc-StreamA/BinTools/Fabric/FabricEngine-2.0.0-Windows-x86_64/Exts/Builtin/Parameters/ParamDict.kl",
+		"/D/Zenimax/jb-Tusc-StreamA/BinTools/Fabric/Fabric.sublime-project",
+		"/D/Zenimax/jb-Tusc-StreamA/BinTools/Fabric/ZOS/Exts/test/zoCharacter_SkeletonLoad_TEST.kl",
+		"/D/Zenimax/jb-Tusc-StreamA/BinTools/Fabric/FabricEngine-2.0.0-Windows-x86_64/Exts/Builtin/FileIO/FileSystem.kl",
+		"/D/Zenimax/jb-Tusc-StreamA/BinTools/Fabric/FabricEngine-2.0.0-Windows-x86_64/Exts/Builtin/DFGHelpers/DFGTypes.kl",
+		"/D/Zenimax/jb-Tusc-StreamA/BinTools/Fabric/FabricEngine-2.0.0-Windows-x86_64/Exts/Builtin/InlineDrawing/OGL/OGLShapeHelpers.kl",
+		"/d/Zenimax/jb-Tusc-StreamA/BinTools/python/zos_python/ZOS_PyProj/scripts/fabric_test.py",
+		"/D/hgRepos/Subliminol/.gitignore",
 		"/C/Program Files/Sublime Text 3/Packages/Python.sublime-package",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Sublime-KL-1.1/.no-sublime-package",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Sublime-KL-1.1/.gitignore",
@@ -254,30 +347,20 @@
 		"/D/hgRepos/Subliminol/src/Subliminol.sublime-project",
 		"/D/hgRepos/Subliminol/Subliminol.sublime-project",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Subliminol.sublime-settings",
-		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand/ShellCommand.py",
 		"/D/hgRepos/Subliminol/Subliminol.py",
-		"/D/hgRepos/Subliminol/Subliminol.sublime-build",
-		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
 		"/C/Users/judah/Desktop/Serge_Checkin.txt",
-		"/D/hgRepos/Subliminol/.hgignore",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Subliminol.py",
 		"/C/Program Files/Sublime Text 3/sublime.py",
-		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand/ShellCommand.sublime-settings",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Springboard (Windows).sublime-keymap",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand/OsShell.py",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Example.py",
-		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand/Default.sublime-keymap",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.last-run",
-		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand/SublimeHelper.py",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Springboard/Springboard.py",
-		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/ShellCommand/Default.sublime-keymap",
 		"/C/Program Files/Sublime Text 3/Packages/Default.sublime-package",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Springboard/ShellCommand.py",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/ShellCommand.sublime-keymap",
-		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/Glue/keymaps/Default (Windows).sublime-keymap",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/sublime-text-shell-command-master/Default.sublime-keymap",
-		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/JSON.sublime-settings",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Python.sublime-settings",
 		"/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/sublime-text-shell-command-master/ShellCommand.py",
@@ -328,6 +411,7 @@
 		"height": 158.0,
 		"where_history":
 		[
+			"D:\\Zenimax\\jb-Tusc-StreamA\\BinTools\\Fabric\\FabricEngine-2.0.0-Windows-x86_64\\Exts\\Builtin\\",
 			"C:\\Users\\judah\\AppData\\Roaming\\Sublime Text 3\\Packages\\User\\ShellCommand\\",
 			"D:\\Zenimax\\jb-Tusc-StreamA\\BinTools\\Fabric\\FabricEngine-2.0.0-Windows-x86_64\\Python\\2.7\\FabricEngine\\",
 			"D:\\Zenimax\\jb-Tusc-StreamA\\BinTools\\Fabric\\FabricEngine-2.0.0-Windows-x86_64\\Python\\2.7\\FabricEngine\\Core\\CAPI.py",
@@ -340,6 +424,107 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"OOPS",
+			"READY",
+			"get_target_region",
+			"get_command_regions",
+			"get_target_region",
+			"get_target_region_id",
+			"INITIALIZING",
+			"update_thread",
+			"get_active_thread",
+			"get_target_region_id",
+			"_active_threads",
+			"update_command",
+			"monitor",
+			"get_active_thread",
+			"_active_threads",
+			"to_con",
+			"set_status",
+			"self.command_string_data",
+			"self.command_mode",
+			"_get_command_string_data",
+			"command_string_data",
+			"set_timeout",
+			"print",
+			"history_key",
+			"command_mode",
+			"_init_run",
+			"run_new",
+			"to_console",
+			"run_update",
+			"edit",
+			"_write_count",
+			"SubliminolSystemCall",
+			"get_insertion_point",
+			"_insertion_point",
+			"get_insertion_point",
+			"\"system",
+			"to_consol",
+			"LINE_PREFIX",
+			"get_console",
+			"\"python",
+			"run_upda",
+			"funct",
+			"monitor",
+			"staticm",
+			"def write",
+			"write",
+			"def write",
+			"stdout",
+			"write",
+			"def write",
+			"write",
+			"run_update",
+			"write",
+			"get_data",
+			"monitor",
+			"__active_threads",
+			"monitor",
+			"def report",
+			"monitor",
+			"LOOKS LIKE WE FINISHED THIS BAD BOY, CARLO",
+			"report_data",
+			"_init_run",
+			"last_execution_id",
+			"test_timeout",
+			"get_console",
+			"exc_info",
+			"command_mode",
+			"SubliminolCommand",
+			"report_data",
+			"write",
+			"RUNNING",
+			"set_status",
+			"_insertion_point",
+			".sel()",
+			"set_read_only",
+			"region",
+			"view.sel",
+			"_init_run",
+			"_insertion_point",
+			"get_insertion_point",
+			".sel()",
+			"region",
+			"to_con",
+			"region",
+			"settings",
+			"python_history_length",
+			"_read_only_state_orig",
+			"RUNNING",
+			"uffer",
+			"running",
+			"set_status",
+			"__status",
+			"Running",
+			"to_console",
+			"except",
+			"add_history",
+			"python_run",
+			"Geometry does not have the attribute:",
+			"expand",
+			"object ParamDict",
+			"ParamDict",
 			"self.history",
 			"settings",
 			"sublime-settings",
@@ -366,16 +551,19 @@
 			"widget",
 			"operator",
 			"import",
-			"PYTHONPATH",
-			"class ControlConstruct",
-			"class Armature"
+			"PYTHONPATH"
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
+			"get_command_region",
+			"get_command_region_id",
+			"update_task",
+			"get_active_task",
+			"_tasks",
 			"subliminol",
 			"Subliminol",
 			",\\n",
@@ -391,179 +579,128 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "Subliminol.sublime-project",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1182,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								485,
-								485
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 7.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 466,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								465,
-								429
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 17.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "src/Subliminol.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8015,
+						"buffer_size": 18688,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3558,
-								3558
+								14146,
+								14146
 							]
 						],
 						"settings":
 						{
+							"color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
 							"syntax": "Packages/Python/Python.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1887.0,
+						"translation.y": 7685.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 1,
 					"file": "src/Subliminol.sublime-settings",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 141,
+						"buffer_size": 246,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								140,
-								140
+								243,
+								243
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": ".hgignore",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7,
-								7
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/User/Subliminol-history.sublime-settings",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 115,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								75,
-								75
-							]
-						],
-						"settings":
-						{
+							"color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
 							"syntax": "Packages/JavaScript/JSON.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "data/Batch File.tmLanguage",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6881,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4834,
+								4834
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
+							"syntax": "Packages/XML/XML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1955.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Subliminol.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1196,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								206,
+								206
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 35.0,
+						"translation.y": 62.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -573,52 +710,38 @@
 			"sheets":
 			[
 				{
-					"buffer": 6,
+					"buffer": 4,
 					"file": "build/copy_to_sublime_exe_dir.bat",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 73,
+						"buffer_size": 122,
 						"regions":
 						{
+							"system":
+							{
+								"flags": 272,
+								"regions":
+								[
+									[
+										122,
+										754
+									]
+								],
+								"scope": "a"
+							}
 						},
 						"selection":
 						[
 							[
-								13,
-								57
+								122,
+								122
 							]
 						],
 						"settings":
 						{
+							"color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
 							"syntax": "Packages/Batch File/Batch File.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1333,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1101,
-								1101
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -628,146 +751,30 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "/C/Users/judah/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+					"buffer": 5,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 16856,
+						"buffer_size": 205,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								16672,
-								16672
+								19,
+								19
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 6227.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "Subliminol.sublime-workspace",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 15445,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/Subliminol/data/Batch File.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "src/Subliminol.sublime-workspace",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10904,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								726,
-								726
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1691.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "Subliminol.sublime-build",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 95,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								95,
-								95
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 773,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								773
-							]
-						],
-						"settings":
-						{
-							"auto_name": "Hi Dad!",
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 12,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -801,7 +808,7 @@
 		"cols":
 		[
 			0.0,
-			0.552605138796,
+			0.57780940174,
 			1.0
 		],
 		"rows":
@@ -813,7 +820,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 281.0
+		"height": 318.0
 	},
 	"output.find_results":
 	{
@@ -853,7 +860,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},

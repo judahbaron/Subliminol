@@ -217,4 +217,4 @@ pip-log.txt
 .hgignore
 .hg/*
 *.desc
-.hg/*
+Subliminol.sublime-workspace
