@@ -1,36 +1,44 @@
 import sys
 import os
 import time
+import functools
 import sublime
 import sublime_plugin
 import subprocess
+from threading import Thread
+
+CONSOLE_NAME = "Subliminol: Console"
+SUBLIMINOL_VERSION = "0.3.0"
 
 class InvalidCallType(Exception):
 	pass
 
-# Add the subliminol_core subdirectory so we can import the following modules.
-# sys.path.insert(0, os.path.split(__file__)[0] + "\\subliminol_core")
-
-# from subliminol_exc import InvalidCallType
-# from subliminol_system_call import SubliminolSystemCall
-# from subliminol_python_call import SubliminolPythonCall
-
-CONSOLE_NAME = "Subliminol: Console"
-SUBLIMINOL_VERSION = "0.3.0"
 
 def plugin_loaded():
 	SubliminolCommand.set_status(Status.IDLE)#"LOADED::READY ({0})".format(time.asctime()))
 	SubliminolCommand.report_status()
 
+def print_err():
+	print("{0}\n{1}\n{2}".format(
+				sys.exc_info()[0],
+				sys.exc_info()[1],
+				sys.exc_info()[2]
+			)
+		)
+
 class Status:
 	@staticmethod
 	def NULL():pass
+	@staticmethod
+	def INITIALIZING():pass
 	@staticmethod
 	def RUNNING():pass
 	@staticmethod
 	def ERROR():pass
 	@staticmethod
 	def IDLE():pass
+	@staticmethod
+	def COMPLETE():pass
 
 	def __init__(self, state=None, data=None):
 		if state is None:
@@ -38,7 +46,7 @@ class Status:
 		self._state = state
 		self._data = data
 		self._info = []
-		self.append_info("Init: {0}".format(time.asctime()))
+		# self.append_info("Init: {0}".format(time.asctime()))
 
 	def append_info(self, info):
 		self._info.append(info)
@@ -53,6 +61,7 @@ class Status:
 
 	@state.setter
 	def state(self, i_state):
+		self.append_info("State Change: {0} -> {1} @ {2}".format(self._state.__name__, i_state.__name__, time.asctime()))
 		self._state = i_state
 
 	@property
@@ -66,14 +75,80 @@ class Status:
 	def __repr__(self):
 		return "{0}: ({1})".format(str(self._state.__name__), self.last_info())
 
+def update_task(execution_id):
+	'''
+	This is called, indirectly, by monitor as an asynchronous command is running.
+	It calles the SublimeText plugin command and passes only the execution_id on
+	the argument list. The execution_id is used to identify the correct command
+	instance in SubliminolCommand._tasks[] 
+	'''
+	current_view = sublime.active_window().active_view()
+
+	current_view.run_command(
+		'subliminol',
+		{			
+			'execution_id': execution_id
+		}
+	)
+
+################################################################################
+################################################################################
+
+def get_console(console_name):
+	'''
+	Return the view currently being used as the output console. 
+	'''
+	# self.console.set_syntax_file("Packages/Subliminol/data/Batch File.tmLanguage")
+	console = find_console(console_name)
+	if console is None:
+		console = make_console(console_name)		
+	return console
+
+def make_console(console_name):
+	'''
+	Create the output console used for writing results to. 
+	'''
+	window = sublime.active_window()
+	console = window.new_file()
+	# print(console)
+	console.set_name(console_name)
+	console.set_scratch(False)
+	console.set_read_only(False)
+	return console
+
+def find_console(console_name):
+	'''
+	Search for a view by name that will be used to direct output to.
+	'''
+	console = None
+	for window in sublime.windows():
+		for view in window.views():
+			v_name = view.name()
+			if v_name == console_name:
+				return view
+	return None
+
+################################################################################
+################################################################################
+
+
 class SubliminolCommand(sublime_plugin.TextCommand):
 
 	__status = Status()
+
+	_tasks = []
+
+	last_execution_id = 0
+
+	LINE_PREFIX = "[SBNL] "
 
 	@classmethod
 	def set_status(cls, status):
 		cls.__status.state = status
 
+	@classmethod
+	def get_status(cls):
+		return cls.__status.state
 
 	@classmethod
 	def report_status(cls, *args):
@@ -82,23 +157,19 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 	def __init__(self, *args, **kwargs):
 		sublime_plugin.TextCommand.__init__(self, *args, **kwargs)
 		self._read_only_state_orig = False
-		self._insertion_point = None
-		self._write_count = 0
-		self.console = None
-		self.edit = None
 		self.settings = None
 		self.history = None
-		self.command_string_data = None
+		# self.command_string_data = None
 		# A string indicating either "system" or "python"
-		self.command_mode = None
+		# self.command_mode = None
 
 	@property
-	def history_key(self):
+	def history_key(self, command_mode):
 		'''
 		Generate key based on command_mode member var
 		'''
-		if self.command_mode:
-		    return "{0}_history".format(self.command_mode)
+		if command_mode:
+		    return "{0}_history".format(command_mode)
 		return None
 
 	@property
@@ -108,7 +179,8 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		'''
 		history_length_key = "{0}_history_length".format(self.command_mode)
 		return self.settings.get(history_length_key, 12)
-	
+
+
 	def add_history(self, data):
 		'''
 		Adds data to history and ensures there are no duplicates.
@@ -149,7 +221,7 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 			print("NO HISTORY")
 			return
 		
-		def panel_callback(index):
+		def history_panel_callback(index):
 			if index == -1:
 				return
 			# print("RUNNING FROM HISTORY: {0}".format(history_data[index]))
@@ -165,31 +237,44 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 			)
 		# self.view.show_popup_menu( history_data, panel_callback)
 		history_display_data = [str(hi) for hi in history_data]
-		self.view.window().show_quick_panel( history_display_data, panel_callback)
+		self.view.window().show_quick_panel( history_display_data, history_panel_callback)
 
-	def _init_run(self, edit, command_string_data, command_mode):
-		self._read_only_state_orig = False#self.view.is_read_only()
-		self.edit=edit
-		self._insertion_point = self.get_insertion_point()
-		self._write_count = 0
-		self.command_string_data = command_string_data
-		self.command_mode = command_mode
-		self.set_status(Status.RUNNING)
-		self.console.set_read_only(True)
+	def new_execution_id(self):
+		self.last_execution_id += 1
+		return self.last_execution_id 
 
-	def _clean_exit_run(self):
-		self.edit = None
-		self.command_string_data = None
-		# self.running = False
-		self.command_mode = None
-		self.set_status(Status.IDLE)
-		self.console.set_read_only(self._read_only_state_orig)
+	def get_command_regions(self):
+		view = sublime.active_window().active_view()
+		regions = []
+		for region in view.sel():
+			if region.b-region.a == 0:
+				# if region is zero length extend it to contain the selected line
+				region = view.line(region)
+			regions.append(region)
+		return regions
 
-	def run(self, edit, command_mode="system", history_panel_mode=False, command_string_data=None):
+	def _get_command_string_data(self, command_string_data):
+		# When nothing is provided on the call to run(), command_string_data
+		# is populated from the current selection.
+		l_command_string_data = []
+		view = sublime.active_window().active_view()
+		if command_string_data is None:
+			# Gather command string data from the selections in the view
+			for region in self.get_command_regions():
+				l_command_string_data.append(view.substr(region))
+		else:
+			l_command_string_data.extend(command_string_data)
+		return l_command_string_data
+
+	def run(self, edit,
+			command_mode="system",
+			history_panel_mode=False,
+			command_string_data=None,
+			execution_id=None
+		):
 		'''
 		Main entry point for command execution...
 		'''
-
 		self.settings = sublime.load_settings('Subliminol.sublime-settings')
 		self.history = sublime.load_settings('Subliminol-history.sublime-settings')
 		
@@ -197,194 +282,303 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 			self.run_history_panel()
 			return
 
-		self.get_console(console_name=CONSOLE_NAME)
-
-		self.console.set_syntax_file("Packages/Subliminol/data/Batch File.tmLanguage")
-		# self.console.set_syntax_file("Packages/Subliminol/data/Neon.tmTheme")
-
-		self._init_run( edit, command_string_data, command_mode)
-
-		if self.console is None:
-			print("NO CONSOLE! Exiting command.")
-			self._clean_exit_run()
-			return
-
-		# This is reset with each execution.
-		self.command_string_data = []
-
-		# When nothing is provided on the call to run(), command_string_data
-		# is populated from the current selection.
-		if command_string_data is None:
-			# Gather command string data from te selections in the view	
-
-			for region in self.view.sel():
-				if (abs(region.b-region.a)) == 0:
-					region = self.view.line(region)
-				self.command_string_data.append(self.view.substr(region))
+		if execution_id is None:
+			self.run_new(command_mode, command_string_data)
 		else:
-			self.command_string_data.extend(command_string_data)
+			# print("EXISTING RUN")
+			self.run_update(edit, execution_id)
+
+	def run_update(self, edit, execution_id):
+		SubliminolCallBase.update_task(edit, execution_id)
+	
+	def get_call_type(self, key):
+		call_type_dict = {
+							"system": SubliminolSystemCall,
+							"python": SubliminolPythonCall
+						}
+		try:
+			return(call_type_dict[key])
+		except:
+			return None
+
+	def run_new(self, command_mode, command_string_data):
+		console = get_console(console_name=CONSOLE_NAME)
+		view = sublime.active_window().active_view()
+
+		console_mode = False
+		if view == console:
+			console_mode = True
+		execution_id = self.new_execution_id()
 		
-		if len(self.command_string_data):
+		command_string_data = self._get_command_string_data(command_string_data)
+		command_regions = self.get_command_regions()
+
+		if len(command_string_data):
 			the_call = None
-			if self.command_mode == "system":
-				# the_call = self.system_run
-				the_call = SubliminolSystemCall(self.command_string_data)
-			elif self.command_mode == "python":
-				# the_call = self.python_run
-				the_call = SubliminolPythonCall(self.command_string_data)
-			else:
-				self._clean_exit_run()
-				raise InvalidCallType(self.command_mode)
+			call_type = self.get_call_type(command_mode)
+			if command_mode is None:
+				raise InvalidCallType(command_mode)
 
+			the_call = call_type(execution_id, command_string_data, console, console_mode=console_mode)
+			target_region_id = the_call.get_target_region_id()
+			
+			# print("ADDING ICON")
+			# print(command_regions)
+			console.add_regions(target_region_id, command_regions, icon="Packages/Theme - Default/dot.png")
 
-			if(self.view == self.console):
-				# Add a carriage return if the CONSOLE is being used as the input terminal
-				# so the printed text is not writen to an existing line containing text.
-				last_char = self.view.substr(sublime.Region(self.view.size()-1,self.view.size()))
-				if last_char != "\n":
-					self.write("\n".format(last_char))
-
-			# remap stdout to the console so we don't lose any feedback, including
-			# python returns, stack traces and errors, etc.
-			orig_stdout = sys.stdout
-			sys.stdout = self
-			failure = False
 			try:
-				the_call.run()
+				the_call.start()
 			except Exception:
-				print(sys.exc_info()[0])
-				print(sys.exc_info()[1])
-				print(sys.exc_info()[2])
-				failure = True
-			if self.settings.get("select_output_on_complete"):
-				selection = self.view.sel()
-				selection.clear()
-				region = sublime.Region(self._insertion_point, self._insertion_point+self._write_count)
-				c_regions = self.view.get_regions(self.command_mode)
-				c_regions.append(region)
-				# self.view.add_regions(self.command_mode, c_regions, scope="a", flags=(sublime.PERSISTENT | sublime.DRAW_NO_OUTLINE ) )
-				selection.add(region)
+				print_err()
+				self.set_status(Status.ERROR)
+			
+			#########################################################
+			#########################################################
+		# 	if self.get_status() is not Status.ERROR:
+		# 		# select output upon completion
+		# 		if self.settings.get("select_output_on_complete"):
+		# 			selection = self.console.sel()
+		# 			selection.clear()
+		# 			region = sublime.Region(self._insertion_point, self._insertion_point+self._write_count)
+		# 			c_regions = self.console.get_regions(self.command_mode)
+		# 			c_regions.append(region)
+		# 			# self.view.add_regions(self.command_mode, c_regions, scope="a", flags=(sublime.PERSISTENT | sublime.DRAW_NO_OUTLINE ) )
+		# 			selection.add(region)
+	
 
-			sys.stdout = orig_stdout
+		# do_write_history = True
+		# if self.settings.get("write_history_on_success_only"):
+		# 	if self.get_status() is not Status.ERROR:
+		# 		do_write_history = False
 
-		do_write_history = True
-		if self.settings.get("write_history_on_success_only"):
-			if failure:
-				do_write_history = False
-
-		if do_write_history:
-			self.add_history(self.command_string_data)
-
-		self._clean_exit_run()
+		# if do_write_history:
+		# 	self.add_history(self.command_string_data)
 
 
-	def write(self, data):
+
+################################################################################
+################################################################################
+
+class SubliminolCallBase(Thread):
+	'''
+	Base class for Subliminol calls.
+	'''
+	_tasks = []
+
+	@classmethod
+	def monitor( cls, execution_id ):
 		'''
-		This object has a write() method so it can be passed to stdout, redirecting
-		output into the view specified by self.console.
+		Initially called when a process is first triggered, monitor is used to perform
+		updates on running processes. It re-invokes itself using sublime.set_timeout().
+		Once a process is complete re-invokation is not performed, leaving nothing
+		consuming any performance. 
 		'''
-		self.to_console( data )
 
+		removals = []
+		for at in cls._tasks:
+			if at.execution_id == execution_id:
+				if at.has_data():
+					update_task(execution_id)
 
-	def make_console(self, console_name):
-		'''
-		Create the output console used for writing results to. 
-		'''
-		window = sublime.active_window()
-		console = window.new_file()
-		# print(console)
-		console.set_name(console_name)
-		console.set_scratch(False)
-		console.set_read_only(False)
-		return console
+				if at.status is Status.ERROR:
+					# execution_id may not actually be related to an error here
+					print("ERROR: {0}".format(at.execution_id))
+				elif at.status is Status.RUNNING:
+					# Continue RUNNING until Status.COMPLETE is triggred
+					# print("RE-RUNNING MONITOR")
+					_monitor = functools.partial(cls.monitor, execution_id)
+					sublime.set_timeout(_monitor, 100)
+				elif at.status is Status.COMPLETE:
+					at.status.state = Status.IDLE
+					# Could change how this works so removals is not used. Instead
+					# monitor could be invoked one more time to do a removal pass.
+					print("Subliminol: Command Complete! ID:{0}".format(at.execution_id))
+					removals.append(at)
+				else:
+					# Not sure yet how this may come to be, but it is triggered by
+					# an unhandled status value
+					print("UNEXPECTED STATUS: {0}".format(at.status))
+			
+			for rm in removals:
+				cls._tasks.remove(rm)
 
-	def get_console(self, console_name):
-		'''
-		Return the view currently being used as the output console. 
-		'''
-		console = self.find_console(console_name)
-		if console is None:
-			console = self.make_console(console_name)		
+	def _register(self):
+		self._tasks.append(self)
+
+	def __init__(self, execution_id, command_string_data, console, console_mode=True):
+		Thread.__init__(self)
+		self._status = Status(state=Status.INITIALIZING)
+		self.command_string_data = command_string_data[:]
+		self._data = []
 		self.console = console
+		self.console_mode = console_mode
+		self._execution_id = execution_id
 
-	def find_console(self, console_name):
-		'''
-		Search for a view by name that will be used to direct output to.
-		'''
-		console = None
-		for window in sublime.windows():
-			for view in window.views():
-				v_name = view.name()
-				if v_name == console_name:
-					return view
+		self._write_count = 0
+		self._lock = False
+		self._has_data = False
+		
+		if not self.console_mode:
+			if self.console.substr(self.console.size()) != "\n":
+				self.append("\n")
+
+		self._register()
+		self._status.state = Status.IDLE
+
+
+	@property
+	def status(self):
+		return self._status.state
+
+	@property
+	def execution_id(self):
+	    return self._execution_id
+
+	@execution_id.setter
+	def execution_id(self, value):
+		self.execution_id = value
+
+	@classmethod
+	def get_active_task(cls, execution_id):
+		for at in cls._tasks:
+			if at.execution_id == execution_id:
+				return at
 		return None
 
+	@classmethod
+	def update_task(cls, edit, execution_id):
+		at = cls.get_active_task(execution_id)
+
+		if at is None:
+			print("update_task(): INVALIDE EXECTUTION_ID")
+			return
+
+		data = at.get_data()
+		at.to_console(edit, data)
+
+	def run(self):
+
+		# Generate and trigger the monitoring callback here
+		cb = functools.partial( self.__class__.monitor, self.execution_id )
+
+		self._status.state = Status.RUNNING
+
+		cb()
+
+
+		for command_string in self.command_string_data:
+			try:
+				self.run_single(command_string)
+			except:
+				self._status.state = Status.ERROR
+				self._status.append_info(command_string)
+				return
+
+		# print("ALL DONE NOW")
+		self._status.state = Status.COMPLETE
+
+	def append(self, data):
+		# print("BASE WRITE CALLED\n\t>{0}<".format(len(data)))
+		if len(data):
+			self._data.append(data)
+			self._has_data = True
+	
+	def has_data(self):
+		return self._has_data
+	
+	def get_data(self):
+
+		result = self._data[:]
+		self._data = []
+		self._has_data = False;
+		return result
+
 	def get_insertion_point(self):
-		insertion_point = self.console.size()
-		if self.settings.get("insert_before_selection"):
+		
+		insertion_point = 0
+		l_min = self.console.size()
+		l_max = 0
+
+		if self.console_mode:
+			
 			# If the console is the the current view, then the user is using the
 			# console to perform input. In this case we want to handle insertion
 			# in such a way that reflects standard terminal input behavior.
-			if self.console == self.view:
-				for region in self.view.sel():
-					selected_region = region
-					if selected_region.b - selected_region.a == 0:
-						selected_region = self.view.line(selected_region)
-					insertion_point = selected_region.a
-					if selected_region.b < insertion_point:
-						insertion_point = selected_region.b
+
+			for region in self.get_target_regions():
+				if region.a < l_min:
+					l_min = region.a
+				if region.a > l_max:
+					l_max = region.b
+				if region.b < l_min:
+					l_min = region.b
+				if region.b > l_max:
+					l_max = region.b
+
+			if True: #self.settings.get("insert_before_selection"):
+				insertion_point = l_min
+			else:
+				insertion_point = l_max
+		else:
+			insertion_point = self.console.size()
+
 		return insertion_point
 
-	def to_console(self, output, name=CONSOLE_NAME):
+	def get_target_region_id(self):
+		return "SBNL_{0}_[{1}]".format(self.__class__.__name__, self.execution_id)
+	
+	def make_target_region(self, edit, id=None):
+		if id is None:
+			id = self.get_target_region_id()
+
+		ip = self.get_insertion_point()
+		self.console.insert(edit, ip, "<[]>")
+		target_region = sublime.Region(ip, ip+4)
+		return target_region
+
+	def get_target_regions(self):
+		return self.console.get_regions(self.get_target_region_id())
+
+	def to_console(self, edit, output):
 		'''
 		Write output to console.
 		When status is RUNNING, the console is locked to prevent user input from
 		colliding with the program's output.
 		'''
-		insertion_point = self._insertion_point + self._write_count
+
+		output = "".join(output)
+
+		insertion_point = self.get_insertion_point()
+		
 		self._write_count += len(output)
-		self.console.set_read_only(False)
-		self.console.insert(self.edit, insertion_point, output)
-		self.console.set_read_only(True)
+		# self.console.set_read_only(False)
+		self.console.insert(edit, insertion_point, output)
+		# print("POST WRITE REGIONS:")
+		# print( self.console.get_regions(self.get_target_region_id()) )
+		# self.console.add_regions(self.get_target_region_id(), self.console.get_regions(self.get_target_region_id()), icon="Packages/Theme - Default/dot.png")
+
+		# self.console.set_read_only(True)
 		# Scroll the view to the end of the buffer so we can see what was just written
 		scroll_pos = (0, self.console.layout_extent()[1]-self.console.viewport_extent()[1])
 		self.console.set_viewport_position(scroll_pos)
-
-class SubliminolCallBase(object):
-	'''
-	Base class for Subliminol calls.
-	'''
-
-	def __init__(self, command_string_data):
-		self.command_string_data = command_string_data[:]
-
-	def run(self):
-
-		for command_string in self.command_string_data:
-			self.run_single(command_string)
 
 class SubliminolPythonCall(SubliminolCallBase):
 	'''
 	Subliminol class for Python calls.
 	'''
-	def __init__(self, command_string_data, **kwargs):
-		SubliminolCallBase.__init__(self, command_string_data)
-
-
+	def __init__(self, execution_id, command_string_data, console, console_mode):
+		SubliminolCallBase.__init__(self, execution_id, command_string_data, console, console_mode)
 
 	def run_single(self, command_string):
 		'''
-		Handles the setup of a "python" execute, rather than a system command.
+		Handles the setup and execution of a "python" call, rather than a system command.
 		'''
 
 		try:
 			# result is not returned due to the nature of the execution environment 
-			result = exec(command_string, globals(), locals())
-			
+			result = exec(command_string, globals(), locals())			
 		except:
-			print(sys.exc_info()[0])
-			print(sys.exc_info()[1])
-			print(sys.exc_info()[2])
+			print_err()
 
 
 class SubliminolSystemCall(SubliminolCallBase):
@@ -392,8 +586,8 @@ class SubliminolSystemCall(SubliminolCallBase):
 	Subliminol class for System calls.
 	'''
 
-	def __init__(self, command_string_data):
-		SubliminolCallBase.__init__(self, command_string_data)
+	def __init__(self, execution_id, command_string_data, console, console_mode):
+		SubliminolCallBase.__init__(self, execution_id, command_string_data, console, console_mode)
 
 	def run_single(self, system_call):
 		'''
@@ -404,16 +598,15 @@ class SubliminolSystemCall(SubliminolCallBase):
 		results = ""
 		stdin = subprocess.PIPE
 		proc = subprocess.Popen(
-			system_call,
-			# executable=executable,
-			stdin=subprocess.PIPE,
-			stdout=subprocess.PIPE,
-			stderr=subprocess.STDOUT,
-			shell=True,
-			# cwd=working_dir,
-			# startupinfo=startupinfo
-			)
-
+				system_call,
+				# executable=executable,
+				stdin=subprocess.PIPE,
+				stdout=subprocess.PIPE,
+				stderr=subprocess.STDOUT,
+				shell=True,
+				# cwd=working_dir,
+				# startupinfo=startupinfo
+				)
 
 		if stdin is not None:
 			return_code = None
@@ -424,12 +617,8 @@ class SubliminolSystemCall(SubliminolCallBase):
 					while output:
 						output = proc.stdout.readline().decode().replace('\r\n', '\n')
 						if output != "":
-							results += output
-							if not blocking:
-								if len(results) >= 500:
-									sys.stdout.write(results)									
-									results = ""
-		
-		sys.stdout.write(results)
-		sys.stdout.write("-"*80 + "\n")
+							self.append(output)
+						# else:
+						# This actually happens a lot, so don't do anything...
+						# 	print("UNEXPECTED EMPTY OUTPUT STRING")
 

@@ -3,5 +3,7 @@
 	"select_output_on_complete": true,
 	"system_blocking_mode": false,
 	"write_history_on_success_only": false,
-	"insert_before_selection": true
+	"insert_before_selection": true,
+	"non_blocking_buffer_size": 500,
+	"non_blocking_flush_timeout": 500
 }
