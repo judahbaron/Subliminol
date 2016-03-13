@@ -131,7 +131,8 @@ def find_console(console_name):
 ################################################################################
 ################################################################################
 
-
+def get_history_key(command_mode):
+	return("{0}_history".format(command_mode))
 class SubliminolCommand(sublime_plugin.TextCommand):
 
 	__status = Status()
@@ -163,37 +164,35 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		# A string indicating either "system" or "python"
 		# self.command_mode = None
 
-	@property
-	def history_key(self, command_mode):
-		'''
-		Generate key based on command_mode member var
-		'''
-		if command_mode:
-		    return "{0}_history".format(command_mode)
-		return None
+	# @property
+	# def history_key(self):
+	# 	'''
+	# 	Generate key based on command_mode member var
+	# 	'''
+	# 	if command_mode:
+	# 	    return "{0}_history".format(command_mode)
+	# 	return None
 
-	@property
-	def history_length_setting(self):
+
+	def history_length_setting(self, command_mode):
 		'''
 		Retrieve the maximum number of commands to save in the history array.
 		'''
-		history_length_key = "{0}_history_length".format(self.command_mode)
+		history_length_key = "{0}_history_length".format(command_mode)
 		return self.settings.get(history_length_key, 12)
 
 
-	def add_history(self, data):
+	def add_history(self, data, command_mode):
 		'''
 		Adds data to history and ensures there are no duplicates.
 		The last entry becomes entry [0], so it's at the beginning of the list.
 		'''
-		history_key = self.history_key
-		if history_key is None:
-			print("No history_key!")
-			return
+		history_key = get_history_key(command_mode)
 		command_history = self.history.get(history_key, None)
 		# This may be the first time through, in which case the history array
 		# will be None. Set it to [] instead, so we can add to it and 
 		if command_history is None:
+			print("No history_key!")
 			command_history = []
 
 		# Remove any other instances of this entry from the history array
@@ -204,19 +203,20 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		# Insert at index 0 so the last used entry becomes the first item in the
 		# history array.
 		command_history.insert(0, data)
-
-		if len(command_history) > self.history_length_setting:
-			command_history = command_history[0:(self.history_length_setting-1)]
+		h_length = self.history_length_setting(command_mode)
+		if len(command_history) > h_length:
+			command_history = command_history[0:(h_length-1)]
 		
 		self.history.set(history_key, command_history)
 		sublime.save_settings('Subliminol-history.sublime-settings')
 
-	def run_history_panel(self):
+	def run_history_panel(self, command_mode):
 		'''
 		Open a panel displaying the history array, and allowing the user to make
 		a selection. 
 		'''
-		history_data = self.history.get(self.history_key, None)
+		history_key = get_history_key(command_mode)
+		history_data = self.history.get(history_key, None)
 		if history_data is None:
 			print("NO HISTORY")
 			return
@@ -230,7 +230,7 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 			current_view.run_command(
 				'subliminol',
 				{
-					'command_mode': '{0}'.format(self.command_mode),
+					'command_mode': '{0}'.format(command_mode),
 					'history_panel_mode': False,
 					'command_string_data': history_data[index][:]
 				}
@@ -278,8 +278,10 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		self.settings = sublime.load_settings('Subliminol.sublime-settings')
 		self.history = sublime.load_settings('Subliminol-history.sublime-settings')
 		
+		print(self.history)
+
 		if history_panel_mode:
-			self.run_history_panel()
+			self.run_history_panel(command_mode)
 			return
 
 		if execution_id is None:
@@ -346,13 +348,13 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		# 			selection.add(region)
 	
 
-		# do_write_history = True
-		# if self.settings.get("write_history_on_success_only"):
-		# 	if self.get_status() is not Status.ERROR:
-		# 		do_write_history = False
+		do_write_history = True
+		if self.settings.get("write_history_on_success_only"):
+			if self.get_status() is not Status.ERROR:
+				do_write_history = False
 
-		# if do_write_history:
-		# 	self.add_history(self.command_string_data)
+		if do_write_history:
+			self.add_history(command_string_data, command_mode)
 
 
 

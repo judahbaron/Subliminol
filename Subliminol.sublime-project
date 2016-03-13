@@ -8,6 +8,9 @@
             "follow_symlinks": true
         },
         {
+            "path": "data"
+        },
+        {
             "path": "docs",
             "name": "Documentation",
             "file_exclude_patterns": ["*.css"]
@@ -30,7 +33,6 @@
             "name": "Subliminol",
             "env": {"SUBLIME_PLUGIN_DIR": "$USERPROFILE\\AppData\\Roaming\\Sublime Text 3\\Packages\\Subliminol"},
             
-            "cmd": "\"$project_path\\build\\copy_to_sublime_exe_dir.bat\" \"$project_path\" \"%SUBLIME_PLUGIN_DIR%\"",
             "shell": true,
             
             "variants":[
@@ -38,6 +40,12 @@
                     "name": "Deploy",
                     "cmd": "\"$project_path\\build\\copy_to_sublime_exe_dir.bat\" \"$file\" \"%SUBLIME_PLUGIN_DIR%\"",
                     "shell": true,
+                },
+                {
+                    "name": "PYTHON-BUILD",
+                    "cmd": ["python", "-u", "$project_path\\build\\subliminol-build.py", "$project_path", "%USERPROFILE%\\AppData\\Roaming\\Sublime Text 3\\Installed Packages\\Subliminol.sublime-package"],
+                    "file_regex": "^[ ]*File \"(…*?)\", line ([0-9]*)",
+                    "selector": "source.python"
                 }
             ]
         }
