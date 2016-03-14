@@ -19,7 +19,7 @@ def plugin_loaded():
 	SubliminolCommand.report_status()
 
 def print_err():
-	print("{0}\n{1}\n{2}".format(
+	print("ERROR: {0}\n{1}\n{2}".format(
 				sys.exc_info()[0],
 				sys.exc_info()[1],
 				sys.exc_info()[2]
@@ -110,7 +110,6 @@ def make_console(console_name):
 	'''
 	window = sublime.active_window()
 	console = window.new_file()
-	# print(console)
 	console.set_name(console_name)
 	console.set_scratch(False)
 	console.set_read_only(False)
@@ -224,7 +223,6 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		def history_panel_callback(index):
 			if index == -1:
 				return
-			# print("RUNNING FROM HISTORY: {0}".format(history_data[index]))
 			current_view = sublime.active_window().active_view()
 
 			current_view.run_command(
@@ -278,7 +276,6 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		self.settings = sublime.load_settings('Subliminol.sublime-settings')
 		self.history = sublime.load_settings('Subliminol-history.sublime-settings')
 		
-		print(self.history)
 
 		if history_panel_mode:
 			self.run_history_panel(command_mode)
@@ -287,7 +284,6 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		if execution_id is None:
 			self.run_new(command_mode, command_string_data)
 		else:
-			# print("EXISTING RUN")
 			self.run_update(edit, execution_id)
 
 	def run_update(self, edit, execution_id):
@@ -324,8 +320,6 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 			the_call = call_type(execution_id, command_string_data, console, console_mode=console_mode)
 			target_region_id = the_call.get_target_region_id()
 			
-			# print("ADDING ICON")
-			# print(command_regions)
 			console.add_regions(target_region_id, command_regions, icon="Packages/Theme - Default/dot.png")
 
 			try:
@@ -387,14 +381,13 @@ class SubliminolCallBase(Thread):
 					print("ERROR: {0}".format(at.execution_id))
 				elif at.status is Status.RUNNING:
 					# Continue RUNNING until Status.COMPLETE is triggred
-					# print("RE-RUNNING MONITOR")
 					_monitor = functools.partial(cls.monitor, execution_id)
 					sublime.set_timeout(_monitor, 100)
 				elif at.status is Status.COMPLETE:
 					at.status.state = Status.IDLE
 					# Could change how this works so removals is not used. Instead
 					# monitor could be invoked one more time to do a removal pass.
-					print("Subliminol: Command Complete! ID:{0}".format(at.execution_id))
+					print("Subliminol: Command Complete: {0}".format(at.command_string_data))
 					removals.append(at)
 				else:
 					# Not sure yet how this may come to be, but it is triggered by
@@ -452,7 +445,7 @@ class SubliminolCallBase(Thread):
 		at = cls.get_active_task(execution_id)
 
 		if at is None:
-			print("update_task(): INVALIDE EXECTUTION_ID")
+			print("update_task(): INVALID EXECTUTION_ID")
 			return
 
 		data = at.get_data()
@@ -476,11 +469,9 @@ class SubliminolCallBase(Thread):
 				self._status.append_info(command_string)
 				return
 
-		# print("ALL DONE NOW")
 		self._status.state = Status.COMPLETE
 
 	def append(self, data):
-		# print("BASE WRITE CALLED\n\t>{0}<".format(len(data)))
 		if len(data):
 			self._data.append(data)
 			self._has_data = True
@@ -555,8 +546,6 @@ class SubliminolCallBase(Thread):
 		self._write_count += len(output)
 		# self.console.set_read_only(False)
 		self.console.insert(edit, insertion_point, output)
-		# print("POST WRITE REGIONS:")
-		# print( self.console.get_regions(self.get_target_region_id()) )
 		# self.console.add_regions(self.get_target_region_id(), self.console.get_regions(self.get_target_region_id()), icon="Packages/Theme - Default/dot.png")
 
 		# self.console.set_read_only(True)
@@ -596,7 +585,6 @@ class SubliminolSystemCall(SubliminolCallBase):
 		Method used to handle "system" calls
 		'''
 		blocking = False
-		# print("system_run: {0}".format(system_call))
 		results = ""
 		stdin = subprocess.PIPE
 		proc = subprocess.Popen(
@@ -622,5 +610,4 @@ class SubliminolSystemCall(SubliminolCallBase):
 							self.append(output)
 						# else:
 						# This actually happens a lot, so don't do anything...
-						# 	print("UNEXPECTED EMPTY OUTPUT STRING")
 
