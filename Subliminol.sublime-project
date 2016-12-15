@@ -43,7 +43,7 @@
                 },
                 {
                     "name": "PYTHON-BUILD",
-                    "cmd": ["python", "-u", "$project_path\\build\\subliminol-build.py", "$project_path", "%USERPROFILE%\\AppData\\Roaming\\Sublime Text 3\\Installed Packages\\Subliminol.sublime-package"],
+                    "cmd": ["c:/python27/python.exe", "-u", "$project_path\\build\\subliminol-build.py", "$project_path", "%USERPROFILE%\\AppData\\Roaming\\Sublime Text 3\\Installed Packages\\Subliminol.sublime-package"],
                     "file_regex": "^[ ]*File \"(…*?)\", line ([0-9]*)",
                     "selector": "source.python"
                 }
