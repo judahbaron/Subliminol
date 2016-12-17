@@ -87,7 +87,9 @@ class Status:
 
 	@state.setter
 	def state(self, i_state):
-		self.append_info("State Change: {0} -> {1} @ {2}".format(self._state.__name__, i_state.__name__, time.asctime()))
+		message = "State Change: {0} -> {1} @ {2}".format(self._state.__name__, i_state.__name__, time.asctime())
+		self.append_info(message)
+		sbnl_log(message, level=3)
 		self._state = i_state
 
 	@property
@@ -99,6 +101,7 @@ class Status:
 		self._data = i_data
 
 	def __repr__(self):
+		sbnl_log("status.__repr__()")
 		return "{0}: ({1})".format(str(self._state.__name__), self.last_info())
 
 def update_task(execution_id):
@@ -120,15 +123,21 @@ def update_task(execution_id):
 ################################################################################
 ################################################################################
 
-def get_console(console_name):
+def get_console(console_name, show=True):
 	'''
 	Return the view currently being used as the output console. 
 	'''
 	# self.console.set_syntax_file("Packages/Subliminol/data/Batch File.tmLanguage")
-	console = find_console(console_name)
+	window, console = find_console(console_name)
+
 	if console is None:
 		console = make_console(console_name)		
-	return console
+		window = sublime.active_window()
+		
+	if show:
+		window.focus_view(console)
+
+	return (window, console)
 
 def make_console(console_name):
 	'''
@@ -141,7 +150,13 @@ def make_console(console_name):
 	console.set_read_only(False)
 	return console
 
-def find_console(console_name):
+def show_console(console_name):
+	window, console = find_console(console_name)
+	if window:
+		window.focus_view(console)
+
+
+def find_console(console_name, a_window=None):
 	'''
 	Search for a view by name that will be used to direct output to.
 	'''
@@ -150,8 +165,8 @@ def find_console(console_name):
 		for view in window.views():
 			v_name = view.name()
 			if v_name == console_name:
-				return view
-	return None
+				return (window, view)
+	return (None, None)
 
 ################################################################################
 ################################################################################
@@ -281,6 +296,7 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		return regions
 
 	def _get_command_string_data(self, command_string_data, view=None):
+		sbnl_log("_get_command_string_data", level=3)
 		# When nothing is provided on the call to run(), command_string_data
 		# is populated from the current selection.
 		l_command_string_data = []
@@ -289,7 +305,9 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		if command_string_data is None:
 			# Gather command string data from the selections in the view
 			for region in self.get_command_regions(view):
+				sbnl_log("Orgone!", level=4)
 				l_command_string_data.append(view.substr(region))
+				sbnl_log("Orgone!", level=4)
 		else:
 			l_command_string_data.extend(command_string_data)
 		
@@ -346,7 +364,8 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 
 		view = sublime.active_window().active_view()
 
-		console = get_console(console_name=CONSOLE_NAME)
+		do_show = self.settings.get("subliminol_console_take_focus")
+		window, console = get_console(console_name=CONSOLE_NAME, show=do_show)
 
 		console_mode = False
 		if view == console:
@@ -355,8 +374,9 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 		
 		command_string_data = self._get_command_string_data(command_string_data, view)
 		command_regions = self.get_command_regions(view=view)
-
+		sbnl_log("Cumquats...", level=4)
 		if len(command_string_data):
+			sbnl_log("Culottes..", level=4)
 			the_call = None
 			call_type = self.get_call_type(command_mode)
 			if command_mode is None:
@@ -368,6 +388,7 @@ class SubliminolCommand(sublime_plugin.TextCommand):
 			console.add_regions(target_region_id, command_regions, icon="Packages/Theme - Default/dot.png")
 
 			try:
+				sbnl_log("Starting the call! {}".format(command_string_data), level=4)
 				the_call.start()
 			except Exception:
 				print_err()
@@ -432,7 +453,10 @@ class SubliminolCallBase(Thread):
 					at.status.state = Status.IDLE
 					# Could change how this works so removals is not used. Instead
 					# monitor could be invoked one more time to do a removal pass.
-					sbnl_log("Command Complete: {0}".format(at.command_string_data), level=2)
+					plural = ""
+					if len(at.command_string_data) > 1:
+						plural = "s"
+					sbnl_log("Command{0} Complete: {1}".format(plural, at.command_string_data), level=2)
 					removals.append(at)
 				else:
 					# Not sure yet how this may come to be, but it is triggered by

@@ -5,5 +5,6 @@
 	"subliminol_write_history_on_success_only": false,
 	"subliminol_insert_before_selection": true,
 	"subliminol_non_blocking_buffer_size": 500,
-	"subliminol_non_blocking_flush_timeout": 500
+	"subliminol_non_blocking_flush_timeout": 500,
+	"subliminol_console_take_focus": true
 }
